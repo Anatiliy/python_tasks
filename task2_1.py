@@ -13,3 +13,5 @@ for d in list(input('введите вещественное число ')):
     if d.isdigit():
         result += int(d)
 print(result)
+
+print(sum(int(d) for d in list(input('введите вещественное число ')) if d.isdigit()))
