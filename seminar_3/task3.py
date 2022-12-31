@@ -11,7 +11,7 @@
 def check_numbers(numbers):
     import re
     for num in numbers:
-        return num in re.findall(r'[0-1]*[.]{1}[0-9]*', num)
+        return num in re.findall(r'[0-9]+\.?[0-9]*', num)
 
 
 numbers = input('введите вещественные числа через прбел ').split()
@@ -20,7 +20,7 @@ while not check_numbers(numbers):
     print('не коректно заданы числа')
     numbers = input('введите вещественные числа через прбел ').split()
 
-print(numbers)
+print(list(map(float, numbers)))
 
 
 
