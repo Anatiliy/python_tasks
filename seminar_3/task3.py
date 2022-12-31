@@ -15,13 +15,6 @@ def check_numbers(numbers):
         return num in re.findall(r'[0-9]+\.?[0-9]*', num)
 
 
-def my_map(func, list1):
-    result_list = []
-    for i in list1:
-        result_list.append(func(i))
-    return result_list
-
-
 def task_func(numbers):
     
     result_list = []
