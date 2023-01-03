@@ -7,8 +7,8 @@
 
 
 def fibonachi(num, begin_list = [0, 1]):
-    begin_list.append(begin_list[-1] + begin_list[-2])
     if len(begin_list) <= num:
+        begin_list.append(begin_list[-1] + begin_list[-2])
         return fibonachi(num, begin_list)
     else:
         return begin_list
@@ -25,13 +25,5 @@ def task_funk(num):
     return negofibonachi(num) + fibonachi(num)
 
 
-num = int(input('введите натуральное число '))
-print(fibonachi(num))
-print(negofibonachi(num))
-print(task_funk(num))
-#print(task_funk(int(input('введите натуральное число '))))
-
-
-
-
+print(task_funk(int(input('введите натуральное число '))))
 
