@@ -18,6 +18,9 @@ def create_list_coefficients_polynominal(degree_num, begin_item = 0, end_item = 
     return coefficients_polynominal
 
 
+# функция, создающая многочлен степени degree_num с коэффициентами coefficient_list,
+# записанный в виде строки
+
 def create_polynominal(degree_num, coefficient_list):
     result_polynominal = ''
     for c in coefficient_list:
@@ -33,9 +36,17 @@ def create_polynominal(degree_num, coefficient_list):
     return result_polynominal
 
 
+def writing_to_file(text_of_entry, file_name):
+    with open(file_name, 'w', encoding='utf-8') as output_file:
+        output_file.write(text_of_entry)
+
+
+
 
 # временный вывод
 
 degree_num = int(input('введите натуральное число '))
-print(create_polynominal(degree_num, create_list_coefficients_polynominal(degree_num)))  
 
+polynominal = create_polynominal(degree_num, create_list_coefficients_polynominal(degree_num))
+print(polynominal)
+writing_to_file(polynominal, input('введите имя файла, используя латинские буквы и цифры ') + '.txt')
