@@ -5,9 +5,9 @@
 
 # если k = 2, то многочлены могут быть => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
-# функция, создающая список (coefficients_polynominal) коэффециентов многочлена заданной
+# функция, создающая список (create_list_coefficients_polynominal) коэффециентов многочлена заданной
 # степени (degree_num) в заданном диапазоне (от begin_item до end_item)
-def create_polynominal(degree_num, begin_item = 0, end_item = 100):
+def create_list_coefficients_polynominal(degree_num, begin_item = 0, end_item = 100):
     import random
     coefficients_polynominal = sorted(10 * list(range(begin_item, end_item + 1)))
     random.shuffle(coefficients_polynominal)
