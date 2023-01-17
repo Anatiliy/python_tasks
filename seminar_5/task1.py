@@ -25,6 +25,7 @@ def game(gamer, numbers_of_candies):
 
 
 def gamer_bot(numbers_of_candies):
+    print(f'осталось {numbers_of_candies} конфет')
     if numbers_of_candies < 29:
         print(f'бот забрал {numbers_of_candies} конфет')
         return 0
@@ -34,16 +35,34 @@ def gamer_bot(numbers_of_candies):
     else:
         bot_candies = random.randint(1, 28)
         print(f'бот забрал {bot_candies} конфет')
-        return bot_candies
+        return numbers_of_candies - bot_candies
 
 
-name_of_gamers = input('введите имена игроков через пробел ').split()
-numbers_of_candies = int(input('сколько конфет положить в вазу '))
-while numbers_of_candies > 0:
-    for gamer in name_of_gamers:
-        numbers_of_candies = game(gamer, numbers_of_candies)
+
+
+if input('если хотите играть с ботом, введите "b", если хотите играть с живым игроком, нажмите enter ') == 'b':
+    
+    name_of_gamer = input('введите своё имя ')
+    numbers_of_candies = int(input('сколько конфет положить в вазу '))
+    while numbers_of_candies:
+        numbers_of_candies = game(name_of_gamer, numbers_of_candies)
         if not numbers_of_candies:
-            print(gamer,'победил!!!')
+            print(name_of_gamer,'победил!!!')
             break
+        numbers_of_candies = gamer_bot(numbers_of_candies)
+        if not numbers_of_candies:
+            print('bot победил!!!')
+            break
+
+else:
+    
+    name_of_gamers = input('введите имена игроков через пробел ').split()
+    numbers_of_candies = int(input('сколько конфет положить в вазу '))
+    while numbers_of_candies > 0:
+        for gamer in name_of_gamers:
+            numbers_of_candies = game(gamer, numbers_of_candies)
+            if not numbers_of_candies:
+                print(gamer,'победил!!!')
+                break
     
 
