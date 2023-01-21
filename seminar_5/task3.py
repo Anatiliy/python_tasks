@@ -3,18 +3,18 @@
 # aaaaabbbcccc -> 5a3b4c
 # 5a3b4c -> aaaaabbbcccc
 
-
+# функция, извлекающая данные из файла
 def extract_from_file(file_name):
     with open(file_name, 'r', encoding='utf-8') as input_file:
         data_from_file = input_file.readline()
     return data_from_file
 
-
+# функция записи данных в файл
 def writing_to_file(text_of_entry, file_name):
     with open(file_name, 'w', encoding='utf-8') as output_file:
         output_file.write(text_of_entry)
 
-
+# функция сжатия файла
 def file_compression(source_file, result_file):
     source_data = extract_from_file(source_file)
     intermediate_result = [[0, source_data[0]]]
@@ -28,14 +28,14 @@ def file_compression(source_file, result_file):
     result = ''.join(tuple(map(lambda item: str(item[0]) + item[1], intermediate_result)))
     writing_to_file(result, result_file)
     
-
+# функция расжатия файла
 def file_expantion(source_file, result_file):
     compressed_data = extract_from_file(source_file)
     intermediate_result = ''.join(map(lambda char: char + ' ' if not char.isdigit() else char, compressed_data)).split()
     result = ''.join(map(lambda item: item[-1] * int(item[:-1]), intermediate_result))
     writing_to_file(result, result_file)
 
-
+# функция основной программы
 def main_program():
     key = input('введите "С", если нужно сжать файл, введите "P", если нужно расжать файл ')
     if key in 'cCсС':
@@ -48,7 +48,5 @@ def main_program():
 
 
 #основная программа
-data = 'dddddkjfkja;;;ddddkkkkkkkjjgaeeeeioiamdnnnnnnnnnnnnnnlalalakddddddddddddddd'
-writing_to_file(data, 'f1.txt')
 
 main_program()
