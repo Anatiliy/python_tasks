@@ -9,6 +9,7 @@ def extract_from_file(file_name):
         data_from_file = input_file.readline()
     return data_from_file
 
+
 def writing_to_file(text_of_entry, file_name):
     with open(file_name, 'w', encoding='utf-8') as output_file:
         output_file.write(text_of_entry)
@@ -29,10 +30,8 @@ def file_compression(original_data):
 
 
 def file_expantion(compressed_file):
-    result = ''
     intermediate_result = str(map(lambda char: char + ' ' if char.isalpha() else char, compressed_file)).split()
-    for item in intermediate_result:
-        result += int(intermediate_result[:-1]) + intermediate_result[-1]
+    result = ''.join(map(lambda item: item[-1] * int(item[:-1]), intermediate_result))
     return result
 
 
