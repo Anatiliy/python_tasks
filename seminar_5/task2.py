@@ -4,6 +4,8 @@
 
 import random
 
+
+# функция вывода матрици на экран
 def print_matrix(matrix):
     for row in matrix:
         for item in row:
@@ -11,6 +13,7 @@ def print_matrix(matrix):
         print()
 
 
+# функция, создающая матрицу размера n на  m
 def create_matrix(n, m):
     matrix = []
     for i in range(n):
@@ -18,6 +21,7 @@ def create_matrix(n, m):
     return matrix
 
 
+# функция, поворачивающая матрицу относительно диагонали
 def matrix_rotation(matrix):
     result = create_matrix(len(matrix[0]), len(matrix))
     for j in range(len(matrix[0])):
@@ -25,7 +29,7 @@ def matrix_rotation(matrix):
             result[j][i] = matrix[i][j]
     return result
 
-
+# функция, возвращающая диагонали матрици
 def matrix_diagonal(matrix):
     diagonal1 = []
     diagonal2 = []
@@ -35,6 +39,7 @@ def matrix_diagonal(matrix):
     return diagonal1, diagonal2
 
 
+# функция, возвращающая True, если один из столбцов, строк или диагоналей соответствует ключу
 def check_matrix(matrix, key):
     if key in matrix:
         return True
@@ -46,6 +51,7 @@ def check_matrix(matrix, key):
         return False   
 
 
+# функция, создающая игровое поле
 def create_x_0_matrix():
     matrix = create_matrix(4, 4)
     for i in range(1, 4):
@@ -55,6 +61,7 @@ def create_x_0_matrix():
     return matrix
 
 
+# функция,обрезающая у игрового поля координатные строку и столбец
 def trim_matrix(matrix):
     result = []
     for i in range(1, len(matrix)):
@@ -64,6 +71,7 @@ def trim_matrix(matrix):
     return result
 
 
+# функция, создающая список возможных ходов
 def create_list_motions(n=4, m=4):
     result_list = []
     for i in range(1, n):
@@ -73,6 +81,7 @@ def create_list_motions(n=4, m=4):
     return result_list
 
 
+# функция, создающая список возможных комбинаций
 def create_list_combinations(n=4, m=4):
     matrix = []
     result_list = []
@@ -89,7 +98,7 @@ def create_list_combinations(n=4, m=4):
     return result_list
 
 
-
+# функция, реализующая ход реального игрока
 def motion_of_gamer(gamer, symbol_of_gamer, list_motions):
     print(f'{gamer} ставьте {symbol_of_gamer}')
     motion = tuple(map(int, input('введите координаты в формате: "номер строки" "пробел" "номер столбца" ').split()))
@@ -100,6 +109,7 @@ def motion_of_gamer(gamer, symbol_of_gamer, list_motions):
         return motion_of_gamer(gamer, symbol_of_gamer, list_motions)
 
 
+# функция, реализующая ход бота
 def motion_of_bot(symbol_of_bot, symbol_of_gamer, list_combinations, list_motions):
     print('ходит bot')
     for combi in list_combinations:
@@ -114,12 +124,14 @@ def motion_of_bot(symbol_of_bot, symbol_of_gamer, list_combinations, list_motion
     return random.choice(list_motions)
 
 
+# функция, фиксирующая ходы,сделанные игроками, в списке комбинаций
 def changing_list_combinations(motion, symbol, list_combinations):
     for combi in list_combinations:
         if motion in combi:
             combi[combi.index(motion)] = symbol
 
 
+# функция проверки листа комбинаций на наличие победной комбинации
 def check_list_combinations(list_combinations):
     for combi in list_combinations:        
         if 'X' in combi and combi.count('X') == 3:
@@ -129,6 +141,7 @@ def check_list_combinations(list_combinations):
             return True
 
 
+# функция, реализующая логику игры между реальными игроками
 def game(gamer, x_0_matrix, symbol, list_motions, list_combinations):
     print(f'{gamer} ставьте {symbol}')
     motion = tuple(map(int, input('введите координаты в формате: "номер строки" "пробел" "номер столбца" ').split()))
@@ -140,17 +153,17 @@ def game(gamer, x_0_matrix, symbol, list_motions, list_combinations):
     
 
 
-      
+# основная программа     
 
 x_0_matrix = create_x_0_matrix()
 print_matrix(x_0_matrix)
 list_motions = create_list_motions()
 list_combinations = create_list_combinations()
+lot = random.randint(0, 1) # переменная, реализующая жребий
 
 if input('если хотите играть с ботом, введите "b", если хотите играть с живым игроком, нажмите enter ') == 'b':
-    
+    # игра с ботом
     name_of_gamer = input('введите своё имя ')
-    lot = random.randint(0, 1)
     if lot:
         while list_motions:
             motion = motion_of_bot('X', '0', list_combinations, list_motions)
@@ -177,9 +190,38 @@ if input('если хотите играть с ботом, введите "b", 
                 break
         else:
             print('ничья!!!')
+    else:
+        while list_motions:
+            motion = motion_of_gamer(name_of_gamer, 'X', list_motions)
+            list_motions.pop(list_motions.index(motion))
+            changing_list_combinations(motion, 'X', list_combinations)
+            x_0_matrix[motion[0]][motion[1]] = 'X'
+            print_matrix(x_0_matrix)
+            if check_list_combinations(list_combinations):
+                print(f'{name_of_gamer} победил!!!')
+                break
+            elif all(map(lambda combi: 'X' in combi and '0' in combi, list_combinations)):
+                print('ничья!!!')
+                break
+            motion = motion_of_bot('0', 'X', list_combinations, list_motions)
+            list_motions.pop(list_motions.index(motion))
+            changing_list_combinations(motion, '0', list_combinations)
+            x_0_matrix[motion[0]][motion[1]] = '0'
+            print_matrix(x_0_matrix)
+            if check_list_combinations(list_combinations):
+                print('bot победил!!!')
+                break
+            elif all(map(lambda combi: 'X' in combi and '0' in combi, list_combinations)):
+                print('ничья!!!')
+                break
+        else:
+            print('ничья!!!')
         
 else:
-    name_of_gamers = tuple(zip(input('введите имена игроков через пробел ').split(), ('X', '0'), (['X', 'X', 'X'], ['0', '0', '0'])))
+    # игра между реальными игроками
+    list_names = input('введите имена игроков через пробел ').split()
+    random.shuffle(list_names)
+    name_of_gamers = tuple(zip(list_names, ('X', '0'), (['X', 'X', 'X'], ['0', '0', '0'])))
     flag = True
     while list_motions:
         for gamer, symbol, key in name_of_gamers:
@@ -190,6 +232,8 @@ else:
             elif not list_motions:
                 break
             elif all(map(lambda combi: 'X' in combi and '0' in combi, list_combinations)):
+                print('ничья!')
+                flag = False
                 break
         if not flag:
             break
