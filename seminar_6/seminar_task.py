@@ -1,7 +1,11 @@
 
 
 
-#def calculating_expression():
+def calculating_expression(expression):
+    if '(' in expression:
+        begin_index = expression.index('(') + 1
+        end_index = len(expression) - expression[::-1].index(')') - 1
+        expression = expression[:begin_index - 1] + calculating_expression(expression[begin_index:end_index]) + expression[end_index + 1:]
 
 
 
