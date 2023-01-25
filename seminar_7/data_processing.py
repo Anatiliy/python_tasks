@@ -1,9 +1,8 @@
 
 
 def writing():
-    data = input('введите фамилию ') + ';' + input('введите имя ') + ';' + input('введите номер телефона ') + '\n'
     with open('telephone_directory.csv', 'a', encoding='utf-8') as output_file:
-        output_file.write(data)
+        print(input('введите фамилию '), input('введите имя '), input('введите номер телефона '), sep=';', file=output_file)
 
 
 def browse():
