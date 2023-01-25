@@ -22,4 +22,7 @@ def find():
             if key.lower() in list(map(lambda item: item.lower(), data)):
                 result.append(data)
             data = input_file.readline()
-    return result
+    if result:
+        return result
+    else:
+        print('контакт не найден')
