@@ -8,7 +8,7 @@ def writing():
 
 def browse():
     with open('telephone_directory.csv', 'r', encoding='utf-8') as input_file:
-        data = input_file.readlines()
+        data = list(map(lambda item: item.strip().split(';'), input_file.readlines()))
     return data
 
 
