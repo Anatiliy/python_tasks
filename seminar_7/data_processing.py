@@ -1,7 +1,7 @@
 
 
 def writing():
-    data = input('введите фамилию ') + ';' + input('введите имя ') + ';' + input('введите номер телефона')
+    data = input('введите фамилию ') + ';' + input('введите имя ') + ';' + input('введите номер телефона ') + '\n'
     with open('telephone_directory.csv', 'a', encoding='utf-8') as output_file:
         output_file.write(data)
 
@@ -12,7 +12,9 @@ def browse():
     return data
 
 
-def find(key):
+def find():
+    key = input('введите фамилию, имя или номер телефона ')
+    print()
     with open('telephone_directory.csv', 'r', encoding='utf-8') as input_file:
         data = input_file.readline()
         result = []
