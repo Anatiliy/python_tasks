@@ -22,10 +22,17 @@ def exit():
     print('до свидания!!!')
 
 
+def remove():
+    ct.delete_data()
+    print()
+    main_menu()
+
+
 def main_menu():
-    menu_dict = {1:viewing, 2:search, 3:record, 0:exit}
+    menu_dict = {1:viewing, 2:search, 3:record, 4:remove, 0:exit}
     print('1. Для просмотра телефонного справочника введите "1"')
     print('2. Для поиска контакта введите "2"')
     print('3. Для записи нового контакта введите "3"')
-    print('4. Для выхода из программы введите "0"')
+    print('4. Для удаления контакта введите "4"')
+    print('5. Для выхода из программы введите "0"')
     menu_dict[int(input())]()
