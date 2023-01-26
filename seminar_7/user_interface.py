@@ -1,33 +1,33 @@
 import controller as ct
-
+# вывод на экран справочника
 def viewing():
     ct.show_directory()
     print()
     main_menu()
 
-
+# вывод на экран искомого контакта
 def search():
     ct.show_search_result()
     print()
     main_menu()
 
-
+# запись нового контакта
 def record():
     ct.write_data()
     print()
     main_menu()
 
-
+# выход из программы
 def exit():
     print('до свидания!!!')
 
-
+# удаление контакта
 def remove():
     ct.delete_data()
     print()
     main_menu()
 
-
+# функция главного меню
 def main_menu():
     menu_dict = {1:viewing, 2:search, 3:record, 4:remove, 0:exit}
     print('1. Для просмотра телефонного справочника введите "1"')
