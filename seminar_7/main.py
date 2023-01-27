@@ -1,4 +1,4 @@
-import user_interface as ui
+import controller as ct
 
-ui.main_menu()
+ct.main_program()
 
