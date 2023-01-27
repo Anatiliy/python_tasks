@@ -1,38 +1,45 @@
-import controller as ct
-# вывод на экран справочника
-def viewing():
-    ct.show_directory()
+
+# ввод данных в переменную "result"
+def enter_data(message):
+    result = input(message)
     print()
-    main_menu()
+    return result
 
-# вывод на экран искомого контакта
-def search():
-    ct.show_search_result()
-    print()
-    main_menu()
+# вывод текста на экран
+def show_message(message):
+    print(message)
 
-# запись нового контакта
-def record():
-    ct.write_data()
-    print()
-    main_menu()
 
-# выход из программы
-def exit():
-    print('до свидания!!!')
+# меню изменения контакта
+def change_contact_menu():
+    print('1. Для изменения фамилии введите "1"')
+    print('2. Для изменения имени введите "2"')
+    print('3. Для изменения номера телефона введите "3"')
+    print('4. Для выхода в глвное меню введите "0"')
+    return input()
 
-# удаление контакта
-def remove():
-    ct.delete_data()
-    print()
-    main_menu()
 
-# функция главного меню
+# вывод на экран вложенного списка "data"
+def show(data):
+    if data:
+        data.sort()
+        print('______________________________________')
+        print('Фамилия     Имя         Номер телефона')
+        print('--------------------------------------')
+        for row in data:
+            for item in row:
+                print(item.ljust(12), end='')
+            print()
+        print('______________________________________')
+
+
+# вывод на экран главного меню
 def main_menu():
-    menu_dict = {1:viewing, 2:search, 3:record, 4:remove, 0:exit}
+    print('----------------------------------------------------')
     print('1. Для просмотра телефонного справочника введите "1"')
     print('2. Для поиска контакта введите "2"')
     print('3. Для записи нового контакта введите "3"')
     print('4. Для удаления контакта введите "4"')
-    print('5. Для выхода из программы введите "0"')
-    menu_dict[int(input())]()
+    print('5. Для изменения контакта введите "5"')
+    print('6. Для выхода из программы введите "0"')
+    return input()
